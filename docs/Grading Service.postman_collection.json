@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "79701f61-b881-45a2-a463-adf9d784b1df",
+		"name": "Grading Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12092856"
+	},
+	"item": [
+		{
+			"name": "Submit A User Essay",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"challenge_id\" : 1,\r\n    \"code\" : \"console.log('Hello world')\",\r\n    \"language\" : \"javaScript\" ,\r\n    \"strategy\" : \"OPTIMIZED\",\r\n    \"secondsLeft\" : 1254\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/submit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"submit"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Submit A User Essay",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"challenge_id\" : 1,\r\n    \"code\" : \"console.log('Hello world')\",\r\n    \"language\" : \"javaScript\" ,\r\n    \"strategy\" : \"OPTIMIZED\",\r\n    \"secondsLeft\" : 1254\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/submit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"submit"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Types",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "93"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5d-vXJciU5NTn8UjCw7xbcX/FfqpS4\""
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 27 May 2022 21:59:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"score\": 74.07407407407408,\n        \"calculatedAt\": \"2022-05-27T21:59:48.447Z\"\n    }\n}"
+				}
+			]
+		}
+	]
+}
