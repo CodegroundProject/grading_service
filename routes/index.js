@@ -34,6 +34,8 @@ var numberOfTestPassedStrategy = require("../Utils").numberOfTestPassedStrategy;
  *            code:
  *              type: string
  *              desription: User supplied code
+ *              example: def add(a, b)
+ *                      return a + b
  *            language:
  *              type: string
  *              description: The programming language the code is written in
@@ -47,10 +49,14 @@ var numberOfTestPassedStrategy = require("../Utils").numberOfTestPassedStrategy;
  *              schema:
  *                type: object
  *                properties:
- *                  code:
+ *                  score:
  *                    type: integer,
  *                    description: Submission score
  *                    example: 20
+ *                  createdAt:
+ *                    type: string
+ *                    description: time of calculation
+ *                    example: 2022-05-27T23:33:21.612Z
  */
 router.post('/api/submit', function (req, res, next) {
     const rce_request_body = {
@@ -106,7 +112,7 @@ router.post('/api/submit', function (req, res, next) {
                     throw new Error("UNKNOWN Test STRATEGY !");
             }
 
-            sendResponse(res, 200, true, { score: TheResultedScore, calculatedAt: new Date() })
+            sendResponse(res, 200, true, { score: TheResultedScore, calculatedAt: new Date().toISOString() })
         })
         .catch(err => {
             sendResponse(res, 500, false, err.message)
