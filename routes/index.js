@@ -7,7 +7,7 @@ var fastestStrategy = require("../Utils").fastestStrategy;
 var mostOptimizedStrategy = require("../Utils").mostOptimizedStrategy;
 var numberOfTestPassedStrategy = require("../Utils").numberOfTestPassedStrategy;
 
-
+const { getRCE } = require("../discovery/discovery")
 
 /**
  * @swagger
@@ -74,6 +74,8 @@ router.post('/api/submit', function (req, res, next) {
         // pour specifier le format de reponse
         headers: { "Content-Type": "application/json" }
     };
+
+    console.log(getRCE())
 
     axios.post(process.env.RCE_ENDPOINT, rce_request_body, rce_request_headers)
         .then(resp => {
