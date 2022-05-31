@@ -9,9 +9,8 @@ var numberOfTestPassedStrategy = require("../Utils").numberOfTestPassedStrategy;
 /* GET home page. */
 router.post('/api/submit', function(req, res, next) {
     const rce_request_body={
-      "challenge_id" : req.body["challenge_id"],
       code : req.body.code,
-      language : req.body.language
+      lang : req.body.language
     }
 
     const strategyToUse = req.body.strategy
@@ -24,7 +23,10 @@ router.post('/api/submit', function(req, res, next) {
         headers : { "Content-Type": "application/json"}
     };
 
-    axios.post(process.env.RCE_ENDPOINT  , rce_request_body , rce_request_headers )
+    axios.post(process.env.RCE_ENDPOINT+'/api/rce'  , {
+        "code" : "def add_(a,b):\r\n    return a+b;",
+        "lang" : "python"
+    } )
         .then(resp=>{
     //         resp={
     //             test_results : [
@@ -64,6 +66,7 @@ router.post('/api/submit', function(req, res, next) {
             sendResponse(res , 200 , true , {score : TheResultedScore , calculatedAt : new Date()} )
         })
         .catch(err=>{
+            console.log("ERROR =", err);
             sendResponse(res , 500 , false , err.message)
         })
 
