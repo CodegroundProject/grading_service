@@ -10,6 +10,8 @@ var usersRouter = require('./routes/users');
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 
+const { startHeartBeating } = require("./discovery/discovery")
+
 var app = express();
 const cors = require('cors');
 
@@ -50,6 +52,10 @@ app.use('/', indexRouter);
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
+// Heart beating
+
+startHeartBeating()
 
 // error handler
 app.use(function (err, req, res, next) {
