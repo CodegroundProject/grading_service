@@ -62,13 +62,13 @@ router.post('/api/submit', function (req, res, next) {
     const rce_request_body = {
         "challenge_id": req.body["challenge_id"],
         code: req.body.code,
-        language: req.body.language
+        lang: req.body.language
     }
 
     const strategyToUse = req.body.strategy
     const secondsLeft = req.body.secondsLeft
 
-    const rce_request_options = {
+    const rce_request_headers = {
         // Pour athentification
         // Authorization: `Bearer ${localStorage.getItem("gacela-token")}`,
         // pour specifier le format de reponse
@@ -100,13 +100,14 @@ router.post('/api/submit', function (req, res, next) {
             let TheResultedScore;
             switch (strategyToUse) {
                 case "FASTEST":
-                    TheResultedScore = fastestStrategy({ testResults: resp["test_results"], timeLeft: secondsLeft })
+                    // console.log(resp.data["test_results"])
+                    TheResultedScore = fastestStrategy({ testResults: resp.data["test_results"], timeLeft: secondsLeft })
                     break;
                 case "OPTIMIZED":
-                    TheResultedScore = mostOptimizedStrategy({ testResults: resp["test_results"] })
+                    TheResultedScore = mostOptimizedStrategy({ testResults: resp.data["test_results"] })
                     break;
                 case "SUCCESS_RATIO":
-                    TheResultedScore = numberOfTestPassedStrategy({ testResults: resp["test_results"] })
+                    TheResultedScore = numberOfTestPassedStrategy({ testResults: resp.data["test_results"] })
                     break;
                 default:
                     throw new Error("UNKNOWN Test STRATEGY !");
@@ -115,6 +116,7 @@ router.post('/api/submit', function (req, res, next) {
             sendResponse(res, 200, true, { score: TheResultedScore, calculatedAt: new Date().toISOString() })
         })
         .catch(err => {
+            console.error(err)
             sendResponse(res, 500, false, err.message)
         })
 
